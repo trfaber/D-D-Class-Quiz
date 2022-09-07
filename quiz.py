@@ -17,24 +17,43 @@ def readList(questionList):
     print(questionList)
 
 def startQuiz(questionList):
-    
-    
+    answerlist = []
+
     for question in questionList:
         answer = input(question)
-'''   
-    return answer    
+        answerlist.append(answer)
 
-def writeAnswer(answer):
-    count = 0
-    answer = open("score.txt", "x")
-'''
-    
+    return answerlist    
+
+def determineClass(total):
+    userclass = ""
+    if total < 6:
+        userclass = "bard"
+    elif total < 11:
+        userclass = "wizard"
+    elif total < 16:
+        userclass = "rouge"
+    else:
+        userclass = "barbarian"      
+
+    return userclass
+
+def processAnswer(answerList):
+    total = 0
+    for currentNumber in answerList:
+        total = total + int(currentNumber)
+
+    return total    
+
 def main():
     catchQuestionList = []
     catchQuestionList = readQuestions()
-    readList(catchQuestionList)
-    startQuiz(catchQuestionList)
+    catchAnswerList = []
 
+    catchAnswerList = startQuiz(catchQuestionList)
+    total = processAnswer(catchAnswerList)
+    userclass = determineClass(total) 
+    print("You are a " + userclass)
     
 main()
 #
